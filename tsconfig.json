@@ -1,11 +1,12 @@
 {
   "compilerOptions": {
     "sourceMap": true,
-    "target": "ES2017",
+    "target": "ES2018",
     "module": "CommonJS",
     "allowJs": true,
-    "resolveJsonModule": true
+    "resolveJsonModule": true,
+    "outDir": "dist"
   },
-  "include": ["src/********"],
-  "exclude": ["node_modules", "dist"]
+  "include": ["src"],
+  "exclude": ["node_modules"]
 }
