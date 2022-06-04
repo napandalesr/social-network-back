@@ -3,6 +3,7 @@ import * as bodyParser from 'body-parser';
 import * as cors from 'cors';
 
 import { Express } from 'express';
+import { appRouter } from '../Api';
 
 export default class Server {
   private readonly app: Express;
@@ -10,6 +11,7 @@ export default class Server {
   constructor () {
     this.app = express();
     this.midleware();
+    this.getRouter();
   }
 
   midleware (): void {
@@ -20,6 +22,10 @@ export default class Server {
 
   getApp (): Express {
     return this.app;
+  }
+
+  getRouter (): void {
+    this.app.use(appRouter);
   }
 
   public Start: () => Promise<void> = async () => {
