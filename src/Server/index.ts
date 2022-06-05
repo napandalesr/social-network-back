@@ -20,10 +20,6 @@ export default class Server {
     this.app.use(cors());
   }
 
-  getApp (): Express {
-    return this.app;
-  }
-
   getRouter (): void {
     this.app.use(appRouter);
   }
