@@ -34,6 +34,7 @@ export default class UserRouter {
   };
 
   getRouter (): Router {
+    console.log("oja");
     this.createRoutes.get();
     this.createRoutes.post();
     return this.router;

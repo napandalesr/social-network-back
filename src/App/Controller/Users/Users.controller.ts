@@ -1,3 +1,5 @@
+import { UserRepository } from './../../../AccessData/Repositories/Users/user.repository';
+import { UserAdapter } from './../../Adapter/User/index.adapter';
 import { IResponse } from './../../../interfaces/Response';
 import { IUsers } from './../../Ports/index';
 import { UserDto } from './dto/index';
@@ -9,6 +11,8 @@ export class UserController implements IUsers {
     if (responseValedateDto.length > 0) {
       return { status: 400, data: responseValedateDto };
     }
-    return { status: 200, data: userDto };
+    const userAdapter = new UserAdapter(new UserRepository());
+    const idUser = await userAdapter.create(userDto);
+    return { status: 200, data: { id: idUser, ...userDto } };
   }
 }

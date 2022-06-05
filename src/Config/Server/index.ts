@@ -3,7 +3,7 @@ import * as bodyParser from 'body-parser';
 import * as cors from 'cors';
 
 import { Express } from 'express';
-import { appRouter } from '../Api';
+import { appRouter } from '../../Api';
 
 export default class Server {
   private readonly app: Express;
@@ -11,13 +11,13 @@ export default class Server {
   constructor () {
     this.app = express();
     this.midleware();
-    this.getRouter();
   }
 
   midleware (): void {
     this.app.use(bodyParser.json());
     this.app.use(bodyParser.urlencoded({ extended: false }));
     this.app.use(cors());
+    this.getRouter();
   }
 
   getRouter (): void {
