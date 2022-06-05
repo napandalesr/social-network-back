@@ -7,7 +7,7 @@ export class UserController implements IUsers {
     const validateDto = new UserDto();
     const responseValedateDto = await validateDto.vatidation(userDto);
     if (responseValedateDto.length > 0) {
-      return { status: 404, data: responseValedateDto };
+      return { status: 400, data: responseValedateDto };
     }
     return { status: 200, data: userDto };
   }
