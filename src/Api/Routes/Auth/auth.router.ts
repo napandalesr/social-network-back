@@ -1,8 +1,9 @@
+import { IAuth } from './../../../App/Ports/index';
 import { Router, Request, Response, NextFunction } from 'express';
 
-export default class UserRouter {
+export default class AuthRouter {
   private readonly router: Router;
-  constructor () {
+  constructor (private readonly auth: IAuth) {
     this.router = Router();
   }
 
@@ -14,28 +15,15 @@ export default class UserRouter {
       });
     },
     post: () => {
-      this.router.post("/", (req: Request, res: Response, next: NextFunction) => {
-        res.send("postUser");
-        next();
-      });
-    },
-    put: () => {
-      this.router.put("/", (req: Request, res: Response, next: NextFunction) => {
-        res.send("putUser");
-        next();
-      });
-    },
-    delete: () => {
-      this.router.delete("/", (req: Request, res: Response, next: NextFunction) => {
-        res.send("deleteUser");
+      this.router.post("/", async (req: Request, res: Response, next: NextFunction) => {
+        const response = await this.auth.auth(req.body);
+        res.status(response.status).json(response);
         next();
       });
     }
   };
 
   getRouter (): Router {
-    console.log("oja");
-    this.createRoutes.get();
     this.createRoutes.post();
     return this.router;
   }

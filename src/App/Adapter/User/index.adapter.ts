@@ -6,4 +6,8 @@ export class UserAdapter {
   async create (userDto: UserDto): Promise<void> {
     return this.usersRepository.create(userDto);
   }
+
+  async finByEmail (email: string): Promise<number> {
+    return await this.usersRepository.findByEmail(email);
+  }
 }
