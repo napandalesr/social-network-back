@@ -12,6 +12,10 @@ export class UserController implements IUsers {
       return { status: 400, data: responseValedateDto };
     }
     const userAdapter = new UserAdapter(new UserRepository());
+    const userValidate = await userAdapter.finByEmail(userDto.email);
+    if (userValidate === 0) {
+      return { status: 400, data: { message: "El usuario ya se encuentra registrado" } };
+    }
     const idUser = await userAdapter.create(userDto);
     return { status: 200, data: { id: idUser, ...userDto } };
   }
